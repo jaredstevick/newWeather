@@ -1,36 +1,57 @@
-<div class="container">
-    
-        <label class="form-group" for="input">Where are you?</label>   
-        <input id="input" type="text" placeholder="Please enter zipcode or city name..." class="form-control">
-    
-    <div ng-click="getCoords()" class="press-me">Submit</div>
-
-    <h4>Your local weather in {{loc}}</h4>
-    <div class="icon-box">
-        <skycon size="iconObj.size" color='iconObj.color' icon='wIcon'></skycon>
-    </div>
-    
-    <div class="currentWeather">
-        <p class="temp">{{cTemp | number:0}}&#176;F</p>
-        <p class="summary">{{cSummary}}</p>
-        <p class="humid">{{cHumidity * 100}}% humidity</p>
-        <p class="cloud">{{cCloudCover * 100 | number:0}}% cloud cover</p>
-        <p class="cWind">Wind Speed:&nbsp;{{cWind}}mph</p>
-    </div>
-    
-    <div class="forecast">
-        <div class="repeats col-md-3" ng-repeat="day in daily" ng-hide="$first">
-            <p class="date">{{day.time * 1000 | date:'EEEE'}}</p>
-            <p class="ikon">
-                <skycon size="dailyCon.size" color='dailyCon.color' icon='day.icon'></skycon>
-            </p>
-            <p class="dayHigh">Hi:&nbsp;{{day.temperatureMax | number:0}}&#176;F</p>
-            <p class="dayLo">Lo:&nbsp;{{day.temperatureMin | number:0}}&#176;F</p>
-            <p class="sum">{{day.summary}}</p>
-            <p class="chance">{{day.precipProbability * 100 | number:0}}% chance of precipitation</p>
-            <p class="dHumid">{{day.humidity * 100 | number:0}}% humidity</p>
-            <p class="wind">{{day.windSpeed}}&nbsp;mph winds</p>
+<div class="container-fluid">
+    <header>
+        <div class="skycontainer">
+            <skycon size="headerCon.size" color='headerCon.color' icon='headerCon.icon'></skycon>
         </div>
-    </div>
+        <h1>ngWeather</h1>       
+        <p class="inputLabel">Where are You?</p>   
+        <input id="input" type="text" placeholder="I am in.." class="form-control">
+
+        
+        <div ng-click="getCoords()" class="press-me">Submit</div>
+
+    </header>
+
+
+        <div id="now" class="allWeatherData" ng-show="noShow">   
+            <div class="row">
+                <h2>Your local weather in {{loc}}</h2>
+                <div class="currentWeather">
+                    <h2>Right Now</h2>
+                    <div class="left">
+                        <div class="icon-box">
+                            <skycon size="iconObj.size" color='iconObj.color' icon='wIcon'></skycon>
+                        </div>
+                        <p class="temp">{{cTemp | number:0}}&#176;F</p>
+                    </div>
+
+                    <div class="right">
+                        <br>
+                        <p class="summary">{{cSummary}}</p>
+                        <p class="humid">{{cHumidity * 100}}% humidity</p>
+                        <p class="cloud">{{cCloudCover * 100 | number:0}}% cloud cover</p>
+                        <p class="cWind">Wind Speed:&nbsp;{{cWind}}mph</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+            
+                <div class="repeats col-md-3" ng-repeat="day in daily" >
+                    <div class="forecast">
+                        <h4 class="date">{{day.time * 1000 | date:'EEEE'}}</h4>
+                        <p class="ikon">
+                            <skycon size="dailyCon.size" color='dailyCon.color' icon='day.icon'></skycon>
+                        </p>
+                        <p class="dayHigh">Hi:&nbsp;{{day.temperatureMax | number:0}}&#176;F</p>
+                        <p class="dayLo">Lo:&nbsp;{{day.temperatureMin | number:0}}&#176;F</p>
+                        <p class="sum">{{day.summary}}</p>
+                        <p class="chance">{{day.precipProbability * 100 | number:0}}% chance of precipitation</p>
+                        <p class="dHumid">{{day.humidity * 100 | number:0}}% humidity</p>
+                        <p class="wind">{{day.windSpeed}}&nbsp;mph winds</p>
+                    </div> 
+                </div>
+            
+            </div>    
 
 </div>
